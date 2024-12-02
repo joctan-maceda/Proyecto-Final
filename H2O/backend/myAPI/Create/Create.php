@@ -3,7 +3,7 @@ namespace myAPI\Create;
 use myAPI\DataBase\DataBase; 
 
 class Create extends DataBase {
-    public function __construct($dbName = 'marketzone', $user = 'root', $password = 'Diosesamor577240323') {
+    public function __construct($dbName = 'h2o', $user = 'root', $password = 'Diosesamor577240323') {
         $this->response = null;
         parent::__construct($user, $password, $dbName);
     }
@@ -18,34 +18,39 @@ class Create extends DataBase {
         return $this->response;
     }
 
-    public function add($product) {
+    public function add($reporte) {
         $data = array(
             'status'  => 'error',
-            'message' => 'Ya existe un producto con ese nombre'
+            'message' => 'Error'
         );
 
-        $productData = json_decode(json_encode($product), false);
+        // Convierte el objeto recibido a un formato utilizable
+        $reporteData = json_decode(json_encode($reporte), false);
 
-        if (isset($productData->nombre)) {
-            $sql = "SELECT * FROM productos WHERE nombre = '{$productData->nombre}' AND eliminado = 0";
-            $result = $this->query($sql);
-
-            if (is_object($result) && $result->num_rows == 0) {
-                $this->conexion->set_charset("utf8");
-
-                $sql = "INSERT INTO productos VALUES (null, '{$productData->nombre}', '{$productData->marca}', '{$productData->modelo}', {$productData->precio}, '{$productData->detalles}', {$productData->unidades}, '{$productData->imagen}', 0)";
-                
-                if ($this->query($sql)) {
-                    $data['status'] = "success";
-                    $data['message'] = "Producto agregado";
-                } else {
-                    $data['message'] = "ERROR: No se ejecutó $sql. " . mysqli_error($this->conexion);
-                }
-            }
-
-            if (is_object($result)) {
-                $result->free();
-            }
+        // Construye la consulta SQL
+        $sql = "INSERT INTO reportes
+                (correo_contacto, municipio, colonia, referencia, tipo_problema, personas_afectadas, principales_afectados, duracion_problema, reportado_autoridad, foto_video, descripcion, nombre_contacto) 
+                VALUES (
+                    '{$reporteData->correo_contacto}', 
+                    '{$reporteData->municipio}', 
+                    '{$reporteData->colonia}', 
+                    '{$reporteData->referencia}', 
+                    '{$reporteData->tipo_problema}', 
+                    '{$reporteData->personas_afectadas}', 
+                    '{$reporteData->principales_afectados}', 
+                    '{$reporteData->duracion_problema}', 
+                    '{$reporteData->reportado_autoridad}',
+                    '{$reporteData->foto_video}',  
+                    '{$reporteData->descripcion}',
+                    '{$reporteData->nombre_contacto}'
+                )";
+        
+        // Ejecuta la consulta y verifica si fue exitosa
+        if ($this->query($sql)) {
+            $data['status'] = "success";
+            $data['message'] = "Reporte agregado exitosamente";
+        } else {
+            $data['message'] = "ERROR: No se ejecutó $sql. " . mysqli_error($this->conexion);
         }
 
         // Almacena el resultado de la operación en response

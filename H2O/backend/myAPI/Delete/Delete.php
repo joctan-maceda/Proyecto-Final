@@ -3,7 +3,7 @@ namespace myAPI\Delete;
 use myAPI\DataBase\DataBase; 
 
 class Delete extends DataBase {
-    public function __construct($dbName = 'marketzone', $user = 'root', $password = 'Diosesamor577240323') {
+    public function __construct($dbName = 'h2o', $user = 'root', $password = 'Diosesamor577240323') {
         $this->response = null;
         parent::__construct($user, $password, $dbName);
     }
@@ -26,7 +26,7 @@ class Delete extends DataBase {
         );
     
         // Realiza la consulta de eliminación lógica
-        $sql = "UPDATE productos SET eliminado=1 WHERE id = {$id}";
+        $sql = "DELETE FROM reportes WHERE id_reporte = {$id}";
     
         if ($this->query($sql)) {
             $data['status'] = "success";

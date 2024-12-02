@@ -3,7 +3,7 @@ namespace myAPI\Read;
 use myAPI\DataBase\DataBase; 
 
 class Read extends DataBase {
-    public function __construct($dbName = 'marketzone', $user = 'root', $password = 'Diosesamor577240323') {
+    public function __construct($dbName = 'h2o', $user = 'root', $password = 'Diosesamor577240323') {
         $this->response = null;
         parent::__construct($user, $password, $dbName);
     }
@@ -20,7 +20,7 @@ class Read extends DataBase {
 
     public function single($id) {
         $data = array();
-        $sql = "SELECT * FROM productos WHERE id = {$id}";
+        $sql = "SELECT * FROM reportes WHERE id_reporte = {$id}";
         $result = $this->query($sql);
 
         if (is_object($result) && $result->num_rows > 0) {
@@ -34,14 +34,12 @@ class Read extends DataBase {
         } else {
             die('Error en la consulta: ' . mysqli_error($this->conexion));
         }
-
-        // Almacena los datos obtenidos en la propiedad response
         $this->response = $data;
     }
 
-    public function singleByName($name) {
+    public function singleByEmail($correo) {
         $data = array();
-        $sql = "SELECT * FROM productos WHERE name = {$nombre}";
+        $sql = "SELECT * FROM reportes WHERE correo_contacto = '{$correo}'";
         $result = $this->query($sql);
 
         if (is_object($result) && $result->num_rows > 0) {
@@ -56,25 +54,20 @@ class Read extends DataBase {
             die('Error en la consulta: ' . mysqli_error($this->conexion));
         }
 
-        // Almacena los datos obtenidos en la propiedad response
         $this->response = $data;
     }
 
     public function list() {
-        // Inicializa el arreglo de respuesta
         $data = array();
-    
-        // Realiza la consulta para obtener todos los productos no eliminados
-        $sql = "SELECT * FROM productos WHERE eliminado = 0";
+
+        // Consulta para obtener todos los reportes
+        $sql = "SELECT * FROM reportes";
         $result = $this->query($sql);
-    
-        // Verifica si hubo resultados y procesa los datos
+
         if (is_object($result) && $result->num_rows > 0) {
-            // Obtiene todos los resultados como un arreglo asociativo
             $rows = $result->fetch_all(MYSQLI_ASSOC);
-    
+
             if (!is_null($rows)) {
-                // Codifica a UTF-8 y mapea los datos al arreglo de respuesta
                 foreach ($rows as $num => $row) {
                     foreach ($row as $key => $value) {
                         $data[$num][$key] = utf8_encode($value);
@@ -85,26 +78,24 @@ class Read extends DataBase {
         } else {
             die('Error en la consulta: ' . mysqli_error($this->conexion));
         }
-    
-        // Almacena el resultado en response para luego poder usar getData()
+
         $this->response = $data;
     }
 
     public function search($search) {
-        // Inicializa el arreglo de respuesta
         $data = array();
-    
-        // Construye la consulta para buscar en múltiples campos
-        $sql = "SELECT * FROM productos WHERE (id = '{$search}' OR nombre LIKE '%{$search}%' OR marca LIKE '%{$search}%' OR detalles LIKE '%{$search}%') AND eliminado = 0";
+
+        // Consulta para buscar por ID, correo o descripción
+        $sql = "SELECT * FROM reportes 
+                WHERE id_reporte = '{$search}' 
+                OR municipio LIKE '%{$search}%' 
+                OR tipo_problema LIKE '%{$search}%'";
         $result = $this->query($sql);
-    
-        // Verifica si hubo resultados y procesa los datos
+
         if (is_object($result) && $result->num_rows > 0) {
-            // Obtiene todos los resultados como un arreglo asociativo
             $rows = $result->fetch_all(MYSQLI_ASSOC);
-    
+
             if (!is_null($rows)) {
-                // Codifica a UTF-8 y mapea los datos al arreglo de respuesta
                 foreach ($rows as $num => $row) {
                     foreach ($row as $key => $value) {
                         $data[$num][$key] = utf8_encode($value);
@@ -115,10 +106,7 @@ class Read extends DataBase {
         } else {
             die('Error en la consulta: ' . mysqli_error($this->conexion));
         }
-    
-        // Almacena el resultado en response para luego poder usar getData()
+
         $this->response = $data;
     }
-
 }
-?>

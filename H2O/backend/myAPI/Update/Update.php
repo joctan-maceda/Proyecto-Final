@@ -3,7 +3,7 @@ namespace myAPI\Update;
 use myAPI\DataBase\DataBase; 
 
 class Update extends DataBase {
-    public function __construct($dbName = 'marketzone', $user = 'root', $password = 'Diosesamor577240323') {
+    public function __construct($dbName = 'h2o', $user = 'root', $password = 'Diosesamor577240323') {
         $this->response = null;
         parent::__construct($user, $password, $dbName);
     }
@@ -18,7 +18,7 @@ class Update extends DataBase {
         return $this->response;
     }
 
-    public function edit($product) {
+    public function edit($report) {
         // Inicializa el arreglo de respuesta
         $data = array(
             'status'  => 'error',
@@ -26,20 +26,26 @@ class Update extends DataBase {
         );
     
         // Convierte el objeto a JSON y luego a un arreglo asociativo
-        $productData = json_decode(json_encode($product), false);
+        $reporteData = json_decode(json_encode($report), false);
     
         // Verifica que se haya proporcionado el ID
-        if (isset($productData->id)) {
+        if (isset($reporteData->id_reporte)) {
             // Construye la consulta de actualización
-            $sql = "UPDATE productos SET 
-                        nombre = '{$productData->nombre}', 
-                        marca = '{$productData->marca}', 
-                        modelo = '{$productData->modelo}', 
-                        precio = {$productData->precio}, 
-                        detalles = '{$productData->detalles}', 
-                        unidades = {$productData->unidades}, 
-                        imagen = '{$productData->imagen}' 
-                    WHERE id = {$productData->id} AND eliminado = 0";
+            $sql = "UPDATE reportes SET 
+                    correo_contacto = '{$reporteData->correo_contacto}', 
+                    municipio = '{$reporteData->municipio}', 
+                    colonia = '{$reporteData->colonia}', 
+                    referencia = '{$reporteData->referencia}', 
+                    tipo_problema = '{$reporteData->tipo_problema}', 
+                    personas_afectadas = {$reporteData->personas_afectadas}, 
+                    principales_afectados = '{$reporteData->principales_afectados}', 
+                    duracion_problema = '{$reporteData->duracion_problema}', 
+                    reportado_autoridad = {$reporteData->reportado_autoridad}, 
+                    foto_video = '{$reporteData->foto_video}', 
+                    descripcion = '{$reporteData->descripcion}', 
+                    nombre_contacto = '{$reporteData->nombre_contacto}' 
+                WHERE id_reporte = {$reporteData->id_reporte};";
+
     
             // Ejecuta la consulta y actualiza el estado según el resultado
             if ($this->query($sql)) {

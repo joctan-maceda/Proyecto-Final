@@ -1,97 +1,102 @@
-// JSON BASE A MOSTRAR EN FORMULARIO
-var baseJSON = {
-    "precio": 0.0,
-    "unidades": 1,
-    "modelo": "XX-000",
-    "marca": "NA",
-    "detalles": "NA",
-    "imagen": "img/default.png"
-  };
+
 
 $(document).ready(function(){
     let edit = false;
+    
+    $('#resultados-reporte').hide();
+    listarReportes();
 
-    let JsonString = JSON.stringify(baseJSON,null,2);
-    $('#description').val(JsonString);
-    $('#product-result').hide();
-    listarProductos();
-
-    function listarProductos() {
+    function listarReportes() {
         $.ajax({
-            url: './backend/product-list.php',
+            url: './backend/report-list.php', // URL del backend que devuelve la lista de reportes
             type: 'GET',
             success: function(response) {
-                // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
-                const productos = JSON.parse(response);
-            
-                // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
-                if(Object.keys(productos).length > 0) {
-                    // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
+                // Convertir la respuesta en un objeto JSON
+                const reportes = JSON.parse(response);
+    
+                // Verificar si el objeto JSON tiene datos
+                if (Object.keys(reportes).length > 0) {
+                    // Crear una plantilla para las filas
                     let template = '';
-
-                    productos.forEach(producto => {
-                        // SE CREA UNA LISTA HTML CON LA DESCRIPCIÓN DEL PRODUCTO
-                        let descripcion = '';
-                        descripcion += '<li>precio: '+producto.precio+'</li>';
-                        descripcion += '<li>unidades: '+producto.unidades+'</li>';
-                        descripcion += '<li>modelo: '+producto.modelo+'</li>';
-                        descripcion += '<li>marca: '+producto.marca+'</li>';
-                        descripcion += '<li>detalles: '+producto.detalles+'</li>';
-                    
+    
+                    reportes.forEach(reporte => {
+                        // Crear una lista con la descripción del reporte
+                        let detalles = '';
+                        detalles += `<li>Municipio: ${reporte.municipio}</li>`;
+                        detalles += `<li>Colonia: ${reporte.colonia}</li>`;
+                        detalles += `<li>Referencia: ${reporte.referencia || 'No especificada'}</li>`;
+                        detalles += `<li>Tipo de problema: ${reporte.tipo_problema}</li>`;
+                        detalles += `<li>Personas afectadas: ${reporte.personas_afectadas}</li>`;
+                        detalles += `<li>Principales afectados: ${reporte.principales_afectados}</li>`;
+                        detalles += `<li>Duración del problema: ${reporte.duracion_problema}</li>`;
+                        detalles += `<li>Reportado a la autoridad: ${reporte.reportado_autoridad ? 'Sí' : 'No'}</li>`;
+                        detalles += `<li>Descripción: ${reporte.descripcion || 'Sin descripción'}</li>`;
+                        detalles += `<li>Contacto: ${reporte.nombre_contacto || 'Anónimo'}</li>`;
+    
                         template += `
-                            <tr productId="${producto.id}">
-                                <td>${producto.id}</td>
-                                <td><a href="#" class="product-item">${producto.nombre}</a></td>
-                                <td><ul>${descripcion}</ul></td>
+                            <tr reportId="${reporte.id_reporte}">
+                                <td> <a href="#" class="report-item">${reporte.id_reporte}</a> </td>
+                                <td>${reporte.correo_contacto}</td>
+                                <td><ul>${detalles}</ul></td>
                                 <td>
-                                    <button class="product-delete btn btn-danger" >
+                                    <button class="report-delete btn btn-danger">
                                         Eliminar
                                     </button>
                                 </td>
                             </tr>
                         `;
                     });
-                    // SE INSERTA LA PLANTILLA EN EL ELEMENTO CON ID "productos"
-                    $('#products').html(template);
+    
+                    // Insertar la plantilla en el elemento con ID "reportes"
+                    $('#reportes').html(template);
+                }else{
+                    console.log("no hay datos");
                 }
             }
         });
     }
+    
 
-    $('#search').keyup(function() {
-        if($('#search').val()) {
+    $('#search').keyup(function () {
+        if ($('#search').val()) {
             let search = $('#search').val();
             $.ajax({
-                url: './backend/product-search.php?search='+$('#search').val(),
-                data: {search},
+                url: './backend/report-search.php?search='+$('#search').val(),
+                data: { search },
                 type: 'GET',
                 success: function (response) {
-                    if(!response.error) {
+                    if (!response.error) {
                         // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
-                        const productos = JSON.parse(response);
-                        
+                        console.log(response);
+                        const reportes = JSON.parse(response);
+    
                         // SE VERIFICA SI EL OBJETO JSON TIENE DATOS
-                        if(Object.keys(productos).length > 0) {
+                        if (Object.keys(reportes).length > 0) {
                             // SE CREA UNA PLANTILLA PARA CREAR LAS FILAS A INSERTAR EN EL DOCUMENTO HTML
                             let template = '';
                             let template_bar = '';
-
-                            productos.forEach(producto => {
-                                // SE CREA UNA LISTA HTML CON LA DESCRIPCIÓN DEL PRODUCTO
-                                let descripcion = '';
-                                descripcion += '<li>precio: '+producto.precio+'</li>';
-                                descripcion += '<li>unidades: '+producto.unidades+'</li>';
-                                descripcion += '<li>modelo: '+producto.modelo+'</li>';
-                                descripcion += '<li>marca: '+producto.marca+'</li>';
-                                descripcion += '<li>detalles: '+producto.detalles+'</li>';
-                            
+    
+                            reportes.forEach(reporte => {
+                                // Crear una lista con la descripción del reporte
+                                let detalles = '';
+                                detalles += `<li>Municipio: ${reporte.municipio}</li>`;
+                                detalles += `<li>Colonia: ${reporte.colonia}</li>`;
+                                detalles += `<li>Referencia: ${reporte.referencia || 'No especificada'}</li>`;
+                                detalles += `<li>Tipo de problema: ${reporte.tipo_problema}</li>`;
+                                detalles += `<li>Personas afectadas: ${reporte.personas_afectadas}</li>`;
+                                detalles += `<li>Principales afectados: ${reporte.principales_afectados}</li>`;
+                                detalles += `<li>Duración del problema: ${reporte.duracion_problema}</li>`;
+                                detalles += `<li>Reportado a la autoridad: ${reporte.reportado_autoridad ? 'Sí' : 'No'}</li>`;
+                                detalles += `<li>Descripción: ${reporte.descripcion || 'Sin descripción'}</li>`;
+                                detalles += `<li>Contacto: ${reporte.nombre_contacto || 'Anónimo'}</li>`;
+            
                                 template += `
-                                    <tr productId="${producto.id}">
-                                        <td>${producto.id}</td>
-                                        <td><a href="#" class="product-item">${producto.nombre}</a></td>
-                                        <td><ul>${descripcion}</ul></td>
+                                    <tr reportId="${reporte.id_reporte}">
+                                        <td> <a href="#" class="report-item">${reporte.id_reporte}</a> </td>
+                                        <td>${reporte.correo_contacto}</td>
+                                        <td><ul>${detalles}</ul></td>
                                         <td>
-                                            <button class="product-delete btn btn-danger">
+                                            <button class="report-delete btn btn-danger">
                                                 Eliminar
                                             </button>
                                         </td>
@@ -99,81 +104,108 @@ $(document).ready(function(){
                                 `;
 
                                 template_bar += `
-                                    <li>${producto.nombre}</il>
-                                `;
+                                <li>${reporte.tipo_problema} en ${reporte.municipio}, ID: ${reporte.id_reporte}</li>
+                            `;
                             });
+                               
+    
                             // SE HACE VISIBLE LA BARRA DE ESTADO
-                            $('#product-result').show();
+                            $('#resultados-reporte').show();
+    
                             // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
                             $('#container').html(template_bar);
+    
                             // SE INSERTA LA PLANTILLA EN EL ELEMENTO CON ID "productos"
-                            $('#products').html(template);    
+                            $('#reportes').html(template);
                         }
                     }
                 }
             });
-        }
-        else {
-            $('#product-result').hide();
+        } else {
+            $('#resultados-reporte').hide();
         }
     });
+    
 
-    $('#product-form').submit(e => {
+
+    $('#saneamiento-form').submit(e => {
         e.preventDefault();
-
+    
         let postData = {
-            nombre: $('#name').val(),
-            id: $('#productId').val(),
-            marca: $('#marca').val(),
-            modelo: $('#modelo').val(),
-            precio: $('#precio').val(),
-            detalles: $('#detalles').val(),
-            unidades: $('#unidades').val(),
-            imagen: $('#imagen').val()
+            id_reporte: $('#reportId').val(),
+            correo_contacto: $('#correo_contacto').val(),
+            municipio: $('#municipio').val(),
+            colonia: $('#colonia').val(),
+            referencia: $('#referencia').val(),
+            tipo_problema: $('#tipo_problema').val(),
+            personas_afectadas: $('#personas_afectadas').val(),
+            principales_afectados: $('#principales_afectados').val(),
+            duracion_problema: $('#duracion_problema').val(),
+            reportado_autoridad: $('#reportado_autoridad').val(),
+            foto_video: $('#foto_video').val(),
+            descripcion: $('#descripcion').val(),
+            nombre_contacto: $('#nombre_contacto').val(),
         };
-
+    
+        /*
         if (!validarFormulario(postData)) {
             return;
-        }
-
-
-        const url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
-        console.log(postData)
+        }*/
+        
+    
+        // Determina la URL de destino dependiendo de si es una edición o una nueva inserción
+        const url = edit === false ? './backend/report-add.php' : './backend/report-edit.php';
+    
+        console.log(postData);
+    
+        // Envia los datos al backend con jQuery AJAX
         $.post(url, postData, (response) => {
             console.log(response);
+    
             // SE OBTIENE EL OBJETO DE DATOS A PARTIR DE UN STRING JSON
             let respuesta = JSON.parse(response);
+            console.log(respuesta);
             // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
             let template_bar = '';
             template_bar += `
-                        <li style="list-style: none;">status: ${respuesta.status}</li>
-                        <li style="list-style: none;">message: ${respuesta.message}</li>
-                    `;
+                <li style="list-style: none;">status: ${respuesta.status}</li>
+                <li style="list-style: none;">message: ${respuesta.message}</li>
+            `;
+    
             // SE REINICIA EL FORMULARIO
-            $('#name').val('');
-            $('#marca').val('');
-            $('#modelo').val('');
-            $('#precio').val('');
-            $('#detalles').val('');
-            $('#unidades').val('');
-            $('#imagen').val('');
+            $('#correo_contacto').val('');
+            $('#municipio').val('');
+            $('#colonia').val('');
+            $('#referencia').val('');
+            $('#tipo_problema').val('');
+            $('#foto_video').val('');
+            $('#descripcion').val('');
+            $('#nombre_contacto').val('');
+    
             // SE HACE VISIBLE LA BARRA DE ESTADO
-            $('#product-result').show();
+            $('#resultados-reporte').show();
+    
             // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
             $('#container').html(template_bar);
-            // SE LISTAN TODOS LOS PRODUCTOS
-            listarProductos();
+    
+            // SE LISTAN TODOS LOS REPORTES
+            listarReportes();
+    
             // SE REGRESA LA BANDERA DE EDICIÓN A false
             edit = false;
         });
     });
+    
 
-    $(document).on('click', '.product-delete', (e) => {
+    $(document).on('click', '.report-delete', (e) => {
         if(confirm('¿Realmente deseas eliminar el producto?')) {
             const element = $(this)[0].activeElement.parentElement.parentElement;
-            const id = $(element).attr('productId');
-            $.post('./backend/product-delete.php', {id}, (response) => {
+            const id = $(element).attr('reportId');
+            console.log(id);
+            $.post('./backend/report-delete.php', {id}, (response) => {
+                console.log(response);
                 let respuesta = JSON.parse(response);
+                
                 // SE CREA UNA PLANTILLA PARA CREAR INFORMACIÓN DE LA BARRA DE ESTADO
                 let template_bar = '';
                 template_bar += `
@@ -181,32 +213,31 @@ $(document).ready(function(){
                         <li style="list-style: none;">message: ${respuesta.message}</li>
                     `;
                 // SE HACE VISIBLE LA BARRA DE ESTADO
-                $('#product-result').show();
+                $('#resultados-reporte').show();
                 // SE INSERTA LA PLANTILLA PARA LA BARRA DE ESTADO
                 $('#container').html(template_bar);
-                listarProductos();
+                listarReportes();
             });
         }
     });
 
-    $(document).on('click', '.product-item', (e) => {
+    $(document).on('click', '.report-item', (e) => {
         const element = $(this)[0].activeElement.parentElement.parentElement;
-        const id = $(element).attr('productId');
-        $.post('./backend/product-single.php', {id}, (response) => {
-            console.log(response)
+        const id = $(element).attr('reportId');
+        $.post('./backend/report-single.php', {id}, (response) => {
+            console.log(response);
             // SE CONVIERTE A OBJETO EL JSON OBTENIDO
-            let product = JSON.parse(response);
-            // SE INSERTAN LOS DATOS ESPECIALES EN LOS CAMPOS CORRESPONDIENTES
-            $('#name').val(product.nombre);
-            // EL ID SE INSERTA EN UN CAMPO OCULTO PARA USARLO DESPUÉS PARA LA ACTUALIZACIÓN
-            $('#productId').val(product.id);
-            // SE ELIMINA nombre, eliminado E id PARA PODER MOSTRAR EL JSON EN EL <textarea>
-            $('#marca').val(product.marca);
-            $('#modelo').val(product.modelo);
-            $('#precio').val(product.precio);
-            $('#detalles').val(product.detalles);
-            $('#unidades').val(product.unidades);
-            $('#imagen').val(product.imagen);
+            let report = JSON.parse(response);
+            console.log("hola"+report.id_reporte);
+            $('#reportId').val(report.id_reporte);
+            $('#correo_contacto').val(report.correo_contacto);
+            $('#municipio').val(report.municipio);
+            $('#colonia').val(report.colonia);
+            $('#referencia').val(report.referencia);
+            $('#tipo_problema').val(report.tipo_problema);
+            $('#foto_video').val(report.foto_video);
+            $('#descripcion').val(report.descripcion);
+            $('#nombre_contacto').val(report.nombre_contacto);
             
             // SE PONE LA BANDERA DE EDICIÓN EN true
             edit = true;
@@ -214,7 +245,7 @@ $(document).ready(function(){
         e.preventDefault();
     });    
 
-
+/*
     // Función para validar el formulario completo
     function validarFormulario(data) {
         return validarNombre(data.nombre) &&
@@ -284,5 +315,5 @@ $(document).ready(function(){
         return true;
     }
 
-
+*/
 });
