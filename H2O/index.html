@@ -2,25 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>ProductApp</title>
+    <title>Reporte de Saneamiento</title>
     <!-- BOOTSTRAP 4  -->
     <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
   </head>
   <body>
-
     <!-- BARRA DE NAVEGACIÓN  -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href=".">ProductApp</a>
+      <a class="navbar-brand" href=".">SaneamientoApp</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto"></ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="ID, marca o descripción" aria-label="Search">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
-          </form>
       </div>
     </nav>
 
@@ -29,56 +23,75 @@
         <div class="col-md-5">
           <div class="card">
             <div class="card-body">
-              <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
-              <form id="product-form">
+              <!-- FORMULARIO PARA REPORTAR PROBLEMAS DE SANEAMIENTO -->
+              <form id="saneamiento-form">
                 <div class="form-group">
-                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto" required>
-                  <div id="estado-nombre" style="display: none;"></div>
+                  <input class="form-control" type="email" id="correo_contacto" placeholder="Correo de contacto" required>
                 </div>
                 <div class="form-group">
-                  <select id="marca" name="marca">
-                    <option value="">Selecciona una marca</option>
-                    <option value="sony">Sony</option>
-                    <option value="universal">Universal</option>
-                    <option value="unknow">Unknow</option>
-                    <option value="Atlantic">Atlantic</option>
-                   
+                  <input class="form-control" type="text" id="municipio" placeholder="Municipio" required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" id="colonia" placeholder="Colonia o barrio" required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" id="referencia" placeholder="Punto de referencia (opcional)">
+                </div>
+                <div class="form-group">
+                  <label for="tipo_problema">Tipo de problema:</label>
+                  <select id="tipo_problema" class="form-control" required>
+                    <option value="">Selecciona un problema</option>
+                    <option value="Falta de acceso al agua potable">Falta de acceso al agua potable</option>
+                    <option value="Contaminación del agua">Contaminación del agua</option>
+                    <option value="Aguas residuales sin tratar">Aguas residuales sin tratar</option>
+                    <option value="Drenaje colapsado o insuficiente">Drenaje colapsado o insuficiente</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" id="modelo" placeholder="Modelo de producto" required>
-                  <div id="estado-modelo" style="display: none;"></div>
+                  <input class="form-control" type="number" id="personas_afectadas" placeholder="Número de personas afectadas" required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" id="precio" placeholder="Precio de producto" required>
-                  <div id="estado-precio" style="display: none;"></div>
+                  <label for="principales_afectados">Principales afectados:</label>
+                  <select id="principales_afectados" class="form-control" multiple>
+                    <option value="Viviendas">Viviendas</option>
+                    <option value="Escuelas">Escuelas</option>
+                    <option value="Hospitales/Clínicas">Hospitales/Clínicas</option>
+                    <option value="Toda la comunidad">Toda la comunidad</option>
+                  </select>
+                  <small class="form-text text-muted">Mantén presionada la tecla Ctrl o Cmd para seleccionar varios.</small>
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control" id="detalles" cols="30" rows="10" placeholder="Detalles" required></textarea>
-                  <div id="estado-detalles" style="display: none;"></div>
+                  <label for="duracion_problema">Duración del problema:</label>
+                  <input class="form-control" type="date" id="duracion_problema" required>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" id="unidades" placeholder="Unidades de producto" required>
-                  <div id="estado-unidades" style="display: none;"></div>
+                  <label for="reportado_autoridad">¿Se ha reportado a las autoridades?</label>
+                  <select id="reportado_autoridad" class="form-control" required>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" type="text" id="imagen" placeholder="Imagen de producto" required>
-                  <div id="estado-imagen" style="display: none;"></div>
+                  <input class="form-control" type="text" id="foto_video" placeholder="Ruta de foto o video (opcional)">
                 </div>
-                <input type="hidden" id="productId">
+                <div class="form-group">
+                  <textarea class="form-control" id="descripcion" cols="30" rows="5" placeholder="Descripción breve del problema"></textarea>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" id="nombre_contacto" placeholder="Nombre de contacto (opcional)">
+                </div>
                 <button class="btn btn-primary btn-block text-center" type="submit">
-                  Agregar Producto
+                  Enviar Reporte
                 </button>
               </form>
             </div>
           </div>
         </div>
 
-        <!-- TABLA  -->
+        <!-- TABLA PARA MOSTRAR RESULTADOS -->
         <div class="col-md-7">
-          <div class="card my-4" id="product-result">
+          <div class="card my-4" id="resultados-reporte">
             <div class="card-body">
-              <!-- RESULTADO -->
               <ul id="container"></ul>
             </div>
           </div>
@@ -87,21 +100,18 @@
             <thead>
               <tr>
                 <td>Id</td>
-                <td>Nombre</td>
-                <td>Descripción</td>
+                <td>Correo</td>
+                <td>Municipio</td>
+                <td>Colonia</td>
               </tr>
             </thead>
-            <tbody id="products"></tbody>
+            <tbody id="reportes"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"></script>
-    <!-- Lógica del Frontend -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="app.js"></script>
   </body>
-
 </html>
