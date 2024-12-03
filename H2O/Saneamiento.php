@@ -1,13 +1,13 @@
 
     
-<body data-pagina="reportes">
+<body data-pagina="Saneamiento">
 <?php include 'header.php'; ?>
     <div class="container">
       <div class="row p-4">
         <div class="col-md-5">
           <div class="card">
             <div class="card-body">
-              <h2>Aqui ustedes agreguen lo de las estadistiscas de que Puebla, etc...</h2>
+              <h2>Aqui ustedes agreguen lo de el saneamiento de que Puebla, etc...</h2>
             </div>
           </div>
         </div>

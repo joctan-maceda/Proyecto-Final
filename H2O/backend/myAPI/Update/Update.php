@@ -43,7 +43,8 @@ class Update extends DataBase {
                     reportado_autoridad = {$reporteData->reportado_autoridad}, 
                     foto_video = '{$reporteData->foto_video}', 
                     descripcion = '{$reporteData->descripcion}', 
-                    nombre_contacto = '{$reporteData->nombre_contacto}' 
+                    nombre_contacto = '{$reporteData->nombre_contacto}',
+                    link = '{$reporteData->link}'
                 WHERE id_reporte = {$reporteData->id_reporte};";
 
     

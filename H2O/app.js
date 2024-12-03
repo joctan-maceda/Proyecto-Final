@@ -4,7 +4,20 @@ $(document).ready(function(){
     let edit = false;
     
     $('#resultados-reporte').hide();
-    listarReportes();
+
+    // Identificar página actual
+    const paginaActual = $('body').data('pagina'); // Usa un atributo 'data-pagina' en tu HTML
+
+    if (paginaActual === 'reportes') {
+        listarReportes();
+    } else if (paginaActual === 'Blog') {
+        listarReportes_blog();
+    } else if (paginaActual === 'Reporte') {
+        listarReportes();
+    }
+
+
+    
 
     function listarReportes() {
         $.ajax({
@@ -43,6 +56,40 @@ $(document).ready(function(){
                                         Eliminar
                                     </button>
                                 </td>
+                            </tr>
+                        `;
+                    });
+    
+                    // Insertar la plantilla en el elemento con ID "reportes"
+                    $('#reportes').html(template);
+                }else{
+                    console.log("no hay datos");
+                }
+            }
+        });
+    }
+
+    function listarReportes_blog() {
+        $.ajax({
+            url: './backend/report-list.php', // URL del backend que devuelve la lista de reportes
+            type: 'GET',
+            success: function(response) {
+                // Convertir la respuesta en un objeto JSON
+                const reportes = JSON.parse(response);
+    
+                // Verificar si el objeto JSON tiene datos
+                if (Object.keys(reportes).length > 0) {
+                    // Crear una plantilla para las filas
+                    let template = '';
+    
+                    reportes.forEach(reporte => {
+                        // Crear una lista con la descripción del reporte
+    
+                        template += `
+                            <tr reportId="${reporte.id_reporte}">
+                                <td> <a href="#" class="report-item">${reporte.id_reporte}</a> </td>
+                                <td>${reporte.tipo_problema}</td>
+                                <td><a href="${reporte.link}" class="report-item">${reporte.link}</a></td>
                             </tr>
                         `;
                     });
@@ -241,9 +288,14 @@ $(document).ready(function(){
             $('#colonia').val(report.colonia);
             $('#referencia').val(report.referencia);
             $('#tipo_problema').val(report.tipo_problema);
+            $('#personas_afectadas').val(report.personas_afectadas);
+            $('#principales_afectados').val(report.principales_afectados);
+            $('#duracion_problema').val(report.duracion_problema);
+            $('#reportado_autoridad').val(report.reportado_autoridad);
             $('#foto_video').val(report.foto_video);
             $('#descripcion').val(report.descripcion);
             $('#nombre_contacto').val(report.nombre_contacto);
+    
             
             // SE PONE LA BANDERA DE EDICIÓN EN true
             edit = true;

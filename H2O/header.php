@@ -5,8 +5,8 @@
     <title>Reporte de Saneamiento</title>
     <!-- BOOTSTRAP 4  -->
     <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
-  </head>
-  <body>
+  
+  
     <!-- BARRA DE NAVEGACIÓN  -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href=".">ProductApp</a>
@@ -27,10 +27,10 @@
             <a class="nav-link" href="Blog.php">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Saneamiento</a>
+            <a class="nav-link" href="Saneamiento.php">Saneamiento</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Administrador</a>
+            <a class="nav-link" href="Administrador.php">Administrador</a>
           </li>
         </ul>
     
@@ -42,3 +42,4 @@
       </div>
     </nav>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</header>

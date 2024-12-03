@@ -1,3 +1,4 @@
+<body data-pagina="Blog">
 <?php include 'header.php'; ?>
     <div class="container">
       <div class="row p-4">
@@ -23,9 +24,8 @@
         <thead>
             <tr>
             <td>Id</td>
-            <td>Correo</td>
-            <td>Municipio</td>
-            <td>Colonia</td>
+            <td>Tipo de Problema</td>
+            <td>Mapa</td>
             </tr>
         </thead>
         <tbody id="reportes"></tbody>

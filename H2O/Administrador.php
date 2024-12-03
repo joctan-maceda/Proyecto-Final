@@ -77,6 +77,29 @@
           </div>
         </div>
 
+        <!-- TABLA PARA MOSTRAR RESULTADOS -->
+        <div class="col-md-7">
+          <div class="card my-4" id="resultados-reporte">
+            <div class="card-body">
+              <ul id="container"></ul>
+            </div>
+          </div>
+
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>Correo</td>
+                <td>Detalles</td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody id="reportes"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+        
 
     <!--<label for="Mapa">Selecciona la ubicacion en el mapa:</label>
                 <div id="map"></div>
