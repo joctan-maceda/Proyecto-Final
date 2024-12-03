@@ -29,7 +29,7 @@ class Create extends DataBase {
 
         // Construye la consulta SQL
         $sql = "INSERT INTO reportes
-                (correo_contacto, municipio, colonia, referencia, tipo_problema, personas_afectadas, principales_afectados, duracion_problema, reportado_autoridad, foto_video, descripcion, nombre_contacto) 
+                (correo_contacto, municipio, colonia, referencia, tipo_problema, personas_afectadas, principales_afectados, duracion_problema, reportado_autoridad, foto_video, descripcion, nombre_contacto, link) 
                 VALUES (
                     '{$reporteData->correo_contacto}', 
                     '{$reporteData->municipio}', 
@@ -42,7 +42,8 @@ class Create extends DataBase {
                     '{$reporteData->reportado_autoridad}',
                     '{$reporteData->foto_video}',  
                     '{$reporteData->descripcion}',
-                    '{$reporteData->nombre_contacto}'
+                    '{$reporteData->nombre_contacto}',
+                    '{$reporteData->link}'
                 )";
         
         // Ejecuta la consulta y verifica si fue exitosa

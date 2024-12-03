@@ -131,6 +131,11 @@ $(document).ready(function(){
     $('#saneamiento-form').submit(e => {
         e.preventDefault();
     
+        let link = `https://www.google.com/maps?q=${$('#latitud').val()},${$('#longitud').val()}`;
+
+
+        console.log(link);
+
         let postData = {
             id_reporte: $('#reportId').val(),
             correo_contacto: $('#correo_contacto').val(),
@@ -145,6 +150,7 @@ $(document).ready(function(){
             foto_video: $('#foto_video').val(),
             descripcion: $('#descripcion').val(),
             nombre_contacto: $('#nombre_contacto').val(),
+            link: link
         };
     
         /*
@@ -244,6 +250,23 @@ $(document).ready(function(){
         });
         e.preventDefault();
     });    
+
+    $('#seleccionar-coordenadas').on('click', function () {
+        // Abrir una nueva ventana para el mapa
+        const mapaVentana = window.open('mapa.html', 'Mapa', 'width=800,height=600');
+    
+        // Listener para recibir las coordenadas desde la ventana del mapa
+        window.addEventListener('message', function (event) {
+            if (event.origin !== window.location.origin) return; // Validación del origen
+    
+            const { lat, lng } = event.data; // Recibir datos enviados desde la ventana del mapa
+            $('#latitud').val(lat);
+            $('#longitud').val(lng);
+    
+            console.log(`Coordenadas recibidas: Latitud=${lat}, Longitud=${lng}`);
+        }, false);
+    });
+    
 
 /*
     // Función para validar el formulario completo

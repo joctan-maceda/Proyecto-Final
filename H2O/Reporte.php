@@ -1,33 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Reporte de Saneamiento</title>
-    <!-- BOOTSTRAP 4  -->
-    <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
-  </head>
-  <body>
-    <!-- BARRA DE NAVEGACIÓN  -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href=".">SaneamientoApp</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto"></ul>
-      </div>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto"></ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="Nombre, correo, Descripción" aria-label="Search">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
-          </form>
-      </div>
-
-    </nav>
-
-    <div class="container">
+    
+<?php include 'header.php'; ?>
+<div class="container">
       <div class="row p-4">
         <div class="col-md-5">
           <div class="card">
@@ -43,9 +17,13 @@
                 <div class="form-group">
                   <input class="form-control" type="text" id="colonia" placeholder="Colonia o barrio" required>
                 </div>
+                
                 <div class="form-group">
                   <input class="form-control" type="text" id="referencia" placeholder="Punto de referencia (opcional)">
                 </div>
+                <button id="seleccionar-coordenadas" type="button">Seleccionar En el Mapa</button>
+                <input type="text" id="latitud" name="latitud" placeholder="Latitud" readonly>
+                <input type="text" id="longitud" name="longitud" placeholder="Longitud" readonly>
                 <div class="form-group">
                   <label for="tipo_problema">Tipo de problema:</label>
                   <select id="tipo_problema" class="form-control" required>
@@ -89,7 +67,8 @@
                 <div class="form-group">
                   <input class="form-control" type="text" id="nombre_contacto" placeholder="Nombre de contacto (opcional)">
                 </div>
-                <input type="text" id="reportId">
+                <input type="hidden" id="reportId">
+                <input type="hidden" id="location">
                 <button class="btn btn-primary btn-block text-center" type="submit">
                   Enviar Reporte
                 </button>
@@ -120,8 +99,9 @@
         </div>
       </div>
     </div>
+        
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="app.js"></script>
-  </body>
-</html>
+    <!--<label for="Mapa">Selecciona la ubicacion en el mapa:</label>
+                <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script> -->
+<?php include 'footer.php'; ?>
