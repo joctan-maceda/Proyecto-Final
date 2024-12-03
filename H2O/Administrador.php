@@ -1,7 +1,29 @@
 
-<body data-pagina="Reporte">    
+<body data-pagina="Administrador">    
 <?php include 'header.php'; ?>
-<div class="container">
+<div id="login" class="container">
+  <div class="row p-4">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <form id="login">
+            <div class="form-group">
+              <input class="form-control" type="text" id="correo" placeholder="Correo de contacto" required>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="password" id="password" required>
+            </div>
+            <button class="btn btn-primary btn-block text-center" type="submit">
+                  Iniciar Session
+                </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="inicio" class="container">
       <div class="row p-4">
         <div class="col-md-5">
           <div class="card">

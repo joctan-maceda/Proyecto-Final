@@ -57,6 +57,23 @@ class Read extends DataBase {
         $this->response = $data;
     }
 
+    public function Usuarios($correo, $pass) {
+        $sql = "SELECT 1 FROM administradores WHERE correo_contacto = ? AND pass = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param('ss', $correo, $pass);
+        $stmt->execute();
+        $stmt->store_result();
+    
+        if ($stmt->num_rows > 0) {
+            $stmt->close();
+            return 1; // Usuario encontrado
+        } else {
+            $stmt->close();
+            return 0; // Usuario no encontrado
+        }
+    }
+    
+
     public function list() {
         $data = array();
 

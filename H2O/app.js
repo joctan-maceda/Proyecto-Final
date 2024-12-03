@@ -2,6 +2,7 @@
 
 $(document).ready(function(){
     let edit = false;
+    let admin = false;
     
     $('#resultados-reporte').hide();
 
@@ -10,10 +11,19 @@ $(document).ready(function(){
 
     if (paginaActual === 'reportes') {
         listarReportes();
-    } else if (paginaActual === 'Blog') {
+    }
+    if (paginaActual === 'Blog') {
         listarReportes_blog();
-    } else if (paginaActual === 'Reporte') {
+    } 
+    if (paginaActual === 'Reporte') {
         listarReportes();
+    } 
+
+    if (paginaActual === 'Administrador' && admin === false){
+        $('#inicio').hide();
+    }else{
+        $('#inicio').show();
+        $('#login').hide();
     }
 
 
@@ -248,6 +258,43 @@ $(document).ready(function(){
             edit = false;
         });
     });
+
+    $('#login').submit(e => {
+        e.preventDefault();
+    
+        // Obtén los valores del formulario
+        const correo = $('#correo').val();
+        const pass = $('#password').val();
+    
+        // Enviar datos al backend
+        $.post('./backend/report-admin.php', { correo, pass }, (response) => {
+            try {
+                // Intenta parsear la respuesta JSON
+                let respuesta = JSON.parse(response);
+                
+                if (respuesta.status === 1) {
+                    // Usuario encontrado
+                    alert('Inicio de sesión exitoso');
+                    admin = true;
+                    $('#inicio').show();
+                    $('#login').hide();
+                    listarReportes();
+                    // Redirigir o realizar otras acciones
+                } else if (respuesta.status === 0) {
+                    // Usuario no encontrado
+                    alert('Usuario o contraseña incorrectos');
+                } else {
+                    // Manejar respuestas inesperadas
+                    console.error('Respuesta desconocida:', respuesta);
+                }
+            } catch (error) {
+                console.error('Error al procesar la respuesta:', error);
+            }
+        }).fail(err => {
+            console.error('Error en la solicitud AJAX:', err);
+        });
+    });
+    
     
 
     $(document).on('click', '.report-delete', (e) => {
