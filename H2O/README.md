@@ -10,3 +10,5 @@ Cualquier modificacion ponerla aqui
 Consideren que hice una rama dev, por lo tanto en esa estaremos trabajando 
 
 Igualmente eviten hacer pushes sin preguntar, porque se pueden unir los codigos y tendriamos problemas
+
+Para la parte de la base de datos, es necesario importarla. La plantilla esta en Database, se llama h2o.
