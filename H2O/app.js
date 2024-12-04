@@ -1,26 +1,36 @@
 
 
+
 $(document).ready(function(){
     let edit = false;
     let admin = false;
     
     $('#resultados-reporte').hide();
 
+
     // Identificar página actual
     const paginaActual = $('body').data('pagina'); // Usa un atributo 'data-pagina' en tu HTML
 
     if (paginaActual === 'reportes') {
+        $('#Buscar').hide();
         listarReportes();
     }
     if (paginaActual === 'Blog') {
+        $('#Buscar').hide();
         listarReportes_blog();
     } 
     if (paginaActual === 'Reporte') {
+        $('#Buscar').hide();
         listarReportes();
-    } 
+    }
+    if (paginaActual === 'Saneamiento') {
+        $('#Buscar').hide();
+    }
+    
 
     if (paginaActual === 'Administrador' && admin === false){
         $('#inicio').hide();
+        $('#Buscar').hide();
     }else{
         $('#inicio').show();
         $('#login').hide();
@@ -97,7 +107,7 @@ $(document).ready(function(){
     
                         template += `
                             <tr reportId="${reporte.id_reporte}">
-                                <td> <a href="#" class="report-item">${reporte.id_reporte}</a> </td>
+                                <td>${reporte.id_reporte}</td>
                                 <td>${reporte.tipo_problema}</td>
                                 <td><a href="${reporte.link}" class="report-item">${reporte.link}</a></td>
                             </tr>
@@ -278,6 +288,8 @@ $(document).ready(function(){
                     admin = true;
                     $('#inicio').show();
                     $('#login').hide();
+                    $('#Buscar').show();
+
                     listarReportes();
                     // Redirigir o realizar otras acciones
                 } else if (respuesta.status === 0) {

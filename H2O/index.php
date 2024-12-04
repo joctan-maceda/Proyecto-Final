@@ -17,4 +17,5 @@
     <!--<label for="Mapa">Selecciona la ubicacion en el mapa:</label>
                 <div id="map"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script> -->
+
 <?php include 'footer.php'; ?>

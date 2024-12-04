@@ -34,12 +34,17 @@
           </li>
         </ul>
     
-        <!-- Barra de búsqueda -->
+        
+      </div>
+      
+      <!-- Barra de búsqueda -->
+      <div id="Buscar">
         <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="ID, marca o descripción" aria-label="Search">
+          <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="ID, Municipio, Problema" aria-label="Search">
           <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
         </form>
       </div>
-    </nav>
+      </nav>
+    
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </header>
