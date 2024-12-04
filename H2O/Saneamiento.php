@@ -2,11 +2,11 @@
     
 <body data-pagina="Saneamiento">
 <?php include 'header.php'; ?>
-    <div class="container">
-      <div class="row p-4">
-        <div class="col-md-5">
-          <div class="card">
-            <div class="card-body">
+    <div class="container  d-flex justify-content-center align-items-center">
+      <div class="row p-4  d-flex justify-content-center align-items-center">
+        <div class="col-md-5  d-flex justify-content-center align-items-center">
+          <div class="card  d-flex justify-content-center align-items-center">
+            <div class="card-body  d-flex justify-content-center align-items-center">
               <h2>Aqui ustedes agreguen lo de el saneamiento de que Puebla, etc...</h2>
             </div>
           </div>

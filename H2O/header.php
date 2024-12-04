@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Reporte de Saneamiento</title>
     <!-- BOOTSTRAP 4  -->
-    <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
   
   
     <!-- BARRA DE NAVEGACIÓN  -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href=".">ProductApp</a>
+      <a class="navbar-brand" href=".">H20+</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

@@ -1,16 +1,16 @@
 
 <body data-pagina="Administrador">    
 <?php include 'header.php'; ?>
-<div id="login" class="container">
-  <div class="row p-4">
-    <div class="col-md-5">
+<div id="login" class="container  d-flex justify-content-center align-items-center">
+  <div class="row p-12  d-flex justify-content-center align-items-center " style="min-height: 50vh; width:30%;">
+    <div class="col-md-25">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body ">
           <form id="login">
-            <div class="form-group">
+            <div class="form-group d-flex justify-content-center align-items-center" style="min-height: 10vh;">
               <input class="form-control" type="text" id="correo" placeholder="Correo de contacto" required>
             </div>
-            <div class="form-group">
+            <div class="form-group d-flex justify-content-center align-items-center" style="min-height: 10vh;"">
               <input class="form-control" type="password" id="password" required>
             </div>
             <button class="btn btn-primary btn-block text-center" type="submit">

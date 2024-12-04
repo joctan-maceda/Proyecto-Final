@@ -1,7 +1,7 @@
 <body data-pagina="Blog">
 <?php include 'header.php'; ?>
     <div class="container">
-      <div class="row p-4">
+      <div class="row p-4 d-flex justify-content-center align-items-center">
         <div class="col-md-5">
           <div class="card">
             <div class="card-body">
@@ -13,23 +13,25 @@
     </div>
 
     <!-- TABLA PARA MOSTRAR RESULTADOS -->
-    <div class="col-md-7">
-        <div class="card my-4" id="resultados-reporte">
-        <div class="card-body">
-            <ul id="container"></ul>
-        </div>
-        </div>
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-md-7">
+          <div class="card my-4" id="resultados-reporte">
+          <div class="card-body">
+              <ul id="container"></ul>
+          </div>
+          </div>
 
-        <table class="table table-bordered table-sm">
-        <thead>
-            <tr>
-            <td>Id</td>
-            <td>Tipo de Problema</td>
-            <td>Mapa</td>
-            </tr>
-        </thead>
-        <tbody id="reportes"></tbody>
-        </table>
+          <table class="table table-bordered table-sm">
+          <thead>
+              <tr>
+              <td>Id</td>
+              <td>Tipo de Problema</td>
+              <td>Mapa</td>
+              </tr>
+          </thead>
+          <tbody id="reportes"></tbody>
+          </table>
+      </div>
     </div>
 
     <!--<label for="Mapa">Selecciona la ubicacion en el mapa:</label>
