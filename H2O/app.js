@@ -41,7 +41,7 @@ $(document).ready(function(){
 
     function listarReportes() {
         $.ajax({
-            url: './backend/report-list.php', // URL del backend que devuelve la lista de reportes
+            url: '/backend2/list', // URL del backend que devuelve la lista de reportes
             type: 'GET',
             success: function(response) {
                 // Convertir la respuesta en un objeto JSON
