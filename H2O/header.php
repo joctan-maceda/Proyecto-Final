@@ -24,7 +24,7 @@
             <a class="nav-link" href="Reporte.php">Reportar un problema</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Blog.php">Blog</a>
+            <a class="nav-link" href="Blog.php">Reportes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Saneamiento.php">Saneamiento</a>

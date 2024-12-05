@@ -1,15 +1,9 @@
 <body data-pagina="Blog">
 <?php include 'header.php'; ?>
-    <div class="container">
-      <div class="row p-4 d-flex justify-content-center align-items-center">
-        <div class="col-md-5">
-          <div class="card">
-            <div class="card-body">
-              <h2>Aqui ustedes agreguen lo del blog de que Puebla, etc...</h2>
-            </div>
-          </div>
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="row w-100 d-flex flex-column justify-content-center align-items-center" style="padding-top:10px; ">
+          <h2 class="d-flex justify-content-center align-items-center">REPORTE DE PROBLEMAS EN PUEBLA</h2>
         </div>
-      </div>
     </div>
 
     <!-- TABLA PARA MOSTRAR RESULTADOS -->

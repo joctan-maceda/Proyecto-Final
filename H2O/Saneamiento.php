@@ -40,11 +40,56 @@
           <li style=" margin-bottom: 10px;">Coadyuvar con los municipios y organismos operadores con la finalidad de desarrollar programas de orientación para la preservación, propiciar el aprovechamiento y calidad del agua.</li>
 
         </ul>
+      
+        <div class="row w-100 d-flex flex-column justify-content-center align-items-center" style="padding-top:10px; ">
+            <h2>NECESIDAD DE AGUA EN PUEBLA</h2>
+        </div>
+       
+
+        <div class="row w-100 mt-3 text-justify">
+            <div class="column col-md-6">
+                <div class="row w-100 mt-3 justify-content-center">
+                    <img src="./assets/img/mapa.jpeg" alt="Imagen de Saneamiento"  class="img-fluid w-50" style="padding-bottom:20px;">
+                </div>
+            </div>
+            <div class="column col-md-6 " style="padding-top:5px; display:flex; flex-direction:column; aling-intems:center; justify-content:space-evenly;">
+                <p  style="text-align: justify;">A principios de este año se realizó un análisis
+                    de las bajas coberturas de agua potable de
+                    acuerdo al Censo de INEGI 2020 y las
+                    concesiones de Derechos de Aguas
+                    Nacionales del Registro Público de Derechos
+                    del Agua de la Comisión Nacional del Agua.
+                    
+                </p>
+                <p   style="text-align: justify;">
+                Dicho análisis nos ayuda como referencia
+                    para determinar las necesidades que tiene el
+                    Estado de Puebla para asesoras a los
+                    municipios en temas de infraestructura
+                    hidráulica en el servicio básico de las
+                    viviendas como es el Agua Potable.
+                </p>
+
+                <p   style="text-align: justify;">
+                El ingreso al banco de proyecto, lo pueden realizar a
+                la Comisión Estatal de Agua y Saneamiento de Puebla.
+                Los expedientes de infraestructura hidráulica de
+                agua potable, alcantarillado ó saneamiento.
+                Se revisará, y se analizará la prioridad de acuerdo al
+                Plan Estatal de Desarrollo.
+                </p>
+            </div>
+            
+        </div> 
       </div>
 
 
       </div>           
     </div>
+
+
+    
+
 
     <!--<label for="Mapa">Selecciona la ubicacion en el mapa:</label>
                 <div id="map"></div>
